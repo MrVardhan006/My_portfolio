@@ -18,18 +18,18 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.2rem clamp(1rem,4v
 .nav-links a{color:var(--muted);text-decoration:none;font-size:0.85rem;letter-spacing:0.08em;transition:color 0.2s;text-transform:uppercase}
 .nav-links a:hover{color:var(--accent2)}
 section{position:relative;z-index:1}
-#hero{min-height:100vh;min-height:100svh;display:flex;align-items:center;justify-content:space-between;gap:clamp(1.5rem,4vw,3rem);padding:6rem clamp(1rem,4vw,3rem) 4rem;max-width:1100px;margin:0 auto}
-.hero-content{max-width:700px;min-width:0}
-.hero-photo{position:relative;flex-shrink:0;width:clamp(200px,28vw,320px);aspect-ratio:1/1}
+#hero{min-height:100vh;min-height:100svh;display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"tag tag" "name name" "sub photo" "cta photo";align-content:center;align-items:center;column-gap:clamp(1.5rem,4vw,3rem);padding:6rem clamp(1rem,4vw,3rem) 4rem;max-width:1100px;margin:0 auto;container-type:inline-size}
+.hero-content{display:contents}
+.hero-photo{grid-area:photo;position:relative;width:clamp(180px,24vw,280px);aspect-ratio:1/1;margin:1rem 0 0 auto}
 .hero-photo::before{content:"";position:absolute;inset:-10px;border-radius:50%;background:conic-gradient(from 180deg,var(--accent),var(--accent2),var(--accent));opacity:0.9;filter:blur(14px);z-index:0}
 .hero-photo img{position:relative;z-index:1;width:100%;height:100%;object-fit:cover;object-position:center top;border-radius:50%;border:4px solid var(--bg);display:block}
-.hero-tag{font-family:'Space Mono',monospace;font-size:0.78rem;color:var(--accent2);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:1.5rem;display:flex;align-items:center;gap:0.6rem}
+.hero-tag{grid-area:tag;font-family:'Space Mono',monospace;font-size:0.78rem;color:var(--accent2);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:1.5rem;display:flex;align-items:center;gap:0.6rem}
 .dot{width:6px;height:6px;background:var(--accent2);border-radius:50%;animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.4;transform:scale(0.8)}}
-h1{font-size:clamp(2.2rem,7vw,5rem);font-weight:800;line-height:1.05;margin-bottom:1.2rem;letter-spacing:-0.02em}
+h1{grid-area:name;font-size:clamp(1.1rem,4.5vw,3.6rem);font-size:clamp(1.1rem,4.5cqw,3.6rem);font-weight:800;line-height:1.1;margin-bottom:1.5rem;letter-spacing:-0.02em;white-space:nowrap}
 h1 span{color:var(--accent)}
-.hero-sub{font-size:clamp(0.95rem,2.5vw,1.1rem);color:var(--muted);line-height:1.7;margin-bottom:2.5rem;max-width:520px}
-.cta-row{display:flex;gap:1rem;flex-wrap:wrap}
+.hero-sub{grid-area:sub;font-size:clamp(0.95rem,2.5vw,1.1rem);color:var(--muted);line-height:1.7;margin-bottom:2.5rem;max-width:520px}
+.cta-row{grid-area:cta;align-self:start;display:flex;gap:1rem;flex-wrap:wrap}
 .btn{padding:0.75rem 2rem;border-radius:8px;font-family:'Syne',sans-serif;font-size:0.9rem;font-weight:600;cursor:pointer;text-decoration:none;transition:all 0.25s;letter-spacing:0.03em}
 .btn-primary{background:var(--accent);color:#fff;border:none}
 .btn-primary:hover{background:#8b84ff;transform:translateY(-2px)}
@@ -84,7 +84,8 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:3rem
 .divider{border:none;border-top:1px solid var(--border);margin:0}
 /* ---------- Responsive ---------- */
 @media(max-width:900px){
-#hero{flex-direction:column-reverse;justify-content:center;text-align:center}
+#hero{grid-template-columns:1fr;grid-template-areas:"photo" "tag" "name" "sub" "cta";justify-items:center;text-align:center}
+.hero-photo{margin:0 auto 1.5rem;width:clamp(180px,45vw,260px)}
 .hero-tag,.cta-row{justify-content:center}
 .hero-sub{margin-left:auto;margin-right:auto}
 }
@@ -96,6 +97,7 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:3rem
 .stat-num{font-size:1.4rem}
 }
 @media(max-width:560px){
+h1{white-space:normal;font-size:clamp(1.8rem,9vw,2.4rem);font-size:clamp(1.8rem,9cqw,2.4rem)}
 nav{flex-direction:column;gap:0.5rem;padding:0.7rem 1rem}
 .nav-links{gap:0.9rem;flex-wrap:wrap;justify-content:center}
 .nav-links a{font-size:0.7rem;letter-spacing:0.04em}
